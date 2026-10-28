@@ -1,0 +1,31 @@
+member draws: 10 seeds, 27258 unique clips
+s        int8  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9491 (json 0.9491)
+   16s
+s        w4a8  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9236 (json 0.9236)
+   15s
+s        w4a4  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.8976 (json 0.8976)
+   16s
+m        int8  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9542 (json 0.9542)
+   39s
+m        w4a8  test-set check: pred==stored sim 0.9998 (1 clips differ), eval acc 0.9504 (json 0.9501)
+   43s
+m        w4a4  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9344 (json 0.9344)
+   40s
+l        int8  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9488 (json 0.9488)
+   84s
+l        w4a8  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9501 (json 0.9501)
+   78s
+l        w4a4  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9396 (json 0.9396)
+   85s
+tc8      int8  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9518 (json 0.9518)
+   7s
+tc8      w4a8  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9461 (json 0.9461)
+   5s
+tc8      w4a4  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9341 (json 0.9341)
+   4s
+tc14_15  int8  test-set check: pred==stored sim 0.9998 (1 clips differ), eval acc 0.9553 (json 0.9556)
+   11s
+tc14_15  w4a8  test-set check: pred==stored sim 0.9998 (1 clips differ), eval acc 0.9480 (json 0.9482)
+   13s
+tc14_15  w4a4  test-set check: pred==stored sim 1.0000 (0 clips differ), eval acc 0.9398 (json 0.9398)
+   8s

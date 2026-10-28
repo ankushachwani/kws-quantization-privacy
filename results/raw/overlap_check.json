@@ -1,0 +1,13 @@
+{
+ "test_clips_non_silence": 4482,
+ "test_speakers": 239,
+ "train_speakers": 2112,
+ "test_names_found_in": {
+  "train_split": 0,
+  "validation_list": 0,
+  "testing_list": 4482
+ },
+ "speaker_ids_in_both": 0,
+ "speaker_ids_in_both_examples": [],
+ "test_clips_with_identical_audio_in_train": 0
+}
