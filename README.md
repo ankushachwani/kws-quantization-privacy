@@ -4,6 +4,20 @@ Short answer from these runs: leakage is close to chance for all five models at 
 
 The question comes from Bits for Privacy (https://arxiv.org/pdf/2512.15335), which studies this on images. I did not find prior work on KWS. That is all I am claiming about novelty; I did a limited search.
 
+## Summary
+
+- Setup: five small keyword-spotting networks (DS-CNN-S/M/L, TC-ResNet8, TC-ResNet14-1.5) in three versions each: int8, 4-bit weights with 8-bit activations (w4a8), and 4-bit weights and activations (w4a4). The 4-bit versions are post-training quantised, with no retraining.
+- Attack: loss-threshold membership inference, plus confidence and modified-entropy variants, on the Speech Commands v0.02 test set (non-members) against clips from its training split (assumed members).
+- Result: loss-attack AUC is 0.513 to 0.533 for all 15 model and bit-width combinations. Chance is 0.5. Differences between bit-widths are at most 0.003 AUC, which is inside the noise.
+- AUC tracks each model's train-test accuracy gap across models (Spearman 0.91), not the bit-width.
+- Main limit: which clips each model trained on is assumed from the standard recipe, not known. There is no fp32 baseline, and the attacks are simple ones, not LiRA.
+
+![ROC curves, log-log, int8 vs w4a8 vs w4a4](results/figures/roc_loglog.png)
+
+## Contents
+
+[What was done](#what-was-done) · [Sanity check](#sanity-check-on-membership) · [Results](#results) · [Limits](#limits) · [Related work](#related-work) · [Reproducing](#reproducing) · [Credits](#credits) · [Citation](#citation)
+
 ## What was done
 
 Models: five small KWS networks from the cryptonite project (DS-CNN-S/M/L, TC-ResNet8, TC-ResNet14-1.5), each as an int8 model and two post-training 4-bit variants built from it (w4a8 = 4-bit weights, 8-bit activations; w4a4 = 4-bit weights and activations). The blobs and the bit-exact integer simulator (`qmodel.run_int`) come from cryptonite; there are no fp32 checkpoints, so there is no fp32 row. The res* models and dnn_l are left out (the res* 4-bit variants are broken by post-training quantisation).
@@ -79,6 +93,8 @@ Relation to the accuracy gap (`results/figures/gap_vs_auc.png`):
 
 Across the 15 points AUC rises with the gap (Spearman 0.91), but this is mostly a between-model effect: DS-CNN-L has the largest gap (about 5 pp) and the highest AUC, DS-CNN-S the smallest AUC. Within a model the gap hardly changes between bit-widths (changes are small against the bootstrap intervals; the largest is DS-CNN-M, whose w4a4 gap is 0.8 pp above its int8 gap, with overlapping unpaired intervals), which is consistent with AUC not moving. With 5 models per bit-width, and the 15 points not independent, these correlations are descriptive only.
 
+![AUC against train-test accuracy gap](results/figures/gap_vs_auc.png)
+
 ## Limits
 
 - Membership is assumed from the standard recipe, not verified. Non-member = test set, member = training split; any difference in distribution between them also counts as "leakage" in these numbers.
@@ -90,6 +106,10 @@ Across the 15 points AUC rises with the gap (Spearman 0.91), but this is mostly 
 - TPR@0.1% FPR rests on about 4 non-members.
 - The MFCC mean/std used in training are not in the tree I was given and are not stored in the model json. I recovered them by regression of the cached cryptonite features on freshly computed raw MFCCs (`scripts/00_recover_norm.py`; maximum residual 7e-5 for the 'hello' front end and 2e-4 for 'tang'). This explains the few one-clip differences from the stored simulation mentioned above.
 - The blob loader `load_blob` in cryptonite's `lowbit.py` ignores the per-op output clip range that the 4-bit variants store in the spare OpRec byte, so a w4a4 blob loaded with it runs with 8-bit activation ranges (about 96% agreement with the stored w4a4 simulation instead of 100%). `vendor/blob.py` reads that field back into `out_hi`; with it all 15 models match the stored simulation (modulo the 3 clips above). The source repo was not modified.
+
+## Related work
+
+The closest work I found studies quantisation and membership inference on images or tabular data, not speech: [Bits for Privacy](https://arxiv.org/pdf/2512.15335) (post-training quantisation methods on CIFAR and TinyImageNet), [Membership Inference Risks in Quantized Models](https://arxiv.org/pdf/2502.06567) (theory plus tabular and drug-discovery data) and [Famili and Lao](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10538103/) (quantisation as a defence, on ResNet). Membership inference on audio models exists without compression ([audio MIA with 1D CNNs](https://ar5iv.labs.arxiv.org/html/1911.01888), [VoxGuard](https://arxiv.org/html/2509.18413v2)). I read their abstracts, not the full papers, and I only ran a limited search, so there may be keyword-spotting work I missed. The contribution here is small: the same question on small keyword spotters, comparing the int8 and 4-bit models I already had.
 
 ## Reproducing
 
@@ -107,6 +127,17 @@ Layout: `assets/` model blobs, json, stored simulation outputs, manifest, recove
 ## Credits
 
 - Speech Commands dataset: Pete Warden, "Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition", arXiv:1804.03209 (v0.02 release, CC BY 4.0).
-- Models, quantised variants, integer simulator and front end: the cryptonite project (HiKonv-free), copied read-only into `assets/` and `vendor/`.
+- Models, quantised variants, integer simulator and front end: the cryptonite project, copied read-only into `assets/` and `vendor/`.
 - Bits for Privacy, https://arxiv.org/pdf/2512.15335.
 - Attacks: Yeom et al. 2018 (loss threshold); Song and Mittal 2021 (modified entropy).
+
+## Citation
+
+```
+@misc{kws_quant_privacy,
+  author = {ankushachwani},
+  title  = {Does int8 vs 4-bit post-training quantisation change membership-inference leakage of small keyword-spotting models?},
+  year   = {2026},
+  howpublished = {\url{https://github.com/ankushachwani/kws_quant_privacy}}
+}
+```
