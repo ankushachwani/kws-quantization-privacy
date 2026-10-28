@@ -1,0 +1,121 @@
+{
+ "key": "tc8",
+ "label": "TC-ResNet8",
+ "family": "1-D conv",
+ "frontend": "tang",
+ "n_eval": 3690,
+ "s_in": 0.05111889951811062,
+ "fp32_acc": 0.9509485094850949,
+ "int8_acc": 0.9517615176151761,
+ "int8_vs_fp32_agree": 0.9959349593495935,
+ "arena_bytes": 5656,
+ "blob_bytes": 69720,
+ "macs": 1563264,
+ "weights": 64512,
+ "n_ops": 14,
+ "ops": [
+  {
+   "i": 0,
+   "type": "conv",
+   "tag": "conv0",
+   "macs": 193920,
+   "k": 120
+  },
+  {
+   "i": 1,
+   "type": "conv",
+   "tag": "b0.sc",
+   "macs": 19584,
+   "k": 16
+  },
+  {
+   "i": 2,
+   "type": "conv",
+   "tag": "b0.c1",
+   "macs": 176256,
+   "k": 144
+  },
+  {
+   "i": 3,
+   "type": "conv",
+   "tag": "b0.c2",
+   "macs": 264384,
+   "k": 216
+  },
+  {
+   "i": 4,
+   "type": "add",
+   "tag": "b0.add",
+   "macs": 0,
+   "k": 0
+  },
+  {
+   "i": 5,
+   "type": "conv",
+   "tag": "b1.sc",
+   "macs": 19968,
+   "k": 24
+  },
+  {
+   "i": 6,
+   "type": "conv",
+   "tag": "b1.c1",
+   "macs": 179712,
+   "k": 216
+  },
+  {
+   "i": 7,
+   "type": "conv",
+   "tag": "b1.c2",
+   "macs": 239616,
+   "k": 288
+  },
+  {
+   "i": 8,
+   "type": "add",
+   "tag": "b1.add",
+   "macs": 0,
+   "k": 0
+  },
+  {
+   "i": 9,
+   "type": "conv",
+   "tag": "b2.sc",
+   "macs": 19968,
+   "k": 32
+  },
+  {
+   "i": 10,
+   "type": "conv",
+   "tag": "b2.c1",
+   "macs": 179712,
+   "k": 288
+  },
+  {
+   "i": 11,
+   "type": "conv",
+   "tag": "b2.c2",
+   "macs": 269568,
+   "k": 432
+  },
+  {
+   "i": 12,
+   "type": "add",
+   "tag": "b2.add",
+   "macs": 0,
+   "k": 0
+  },
+  {
+   "i": 13,
+   "type": "gapfc",
+   "tag": "head",
+   "macs": 576,
+   "k": 48
+  }
+ ],
+ "variant": "w4a8",
+ "acc": 0.9460704607046071,
+ "agree_with_int8": 0.9720867208672087,
+ "weights_bits": 4,
+ "act_bits": 8
+}

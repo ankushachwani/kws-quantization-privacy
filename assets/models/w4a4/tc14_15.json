@@ -1,0 +1,184 @@
+{
+ "key": "tc14_15",
+ "label": "TC-ResNet14-1.5",
+ "family": "1-D conv",
+ "frontend": "tang",
+ "n_eval": 3690,
+ "s_in": 0.45639809880937837,
+ "fp32_acc": 0.9552845528455285,
+ "int8_acc": 0.9555555555555556,
+ "int8_vs_fp32_agree": 0.9964769647696476,
+ "arena_bytes": 6464,
+ "blob_bytes": 312180,
+ "macs": 6852528,
+ "weights": 301392,
+ "n_ops": 23,
+ "ops": [
+  {
+   "i": 0,
+   "type": "conv",
+   "tag": "conv0",
+   "macs": 290880,
+   "k": 120
+  },
+  {
+   "i": 1,
+   "type": "conv",
+   "tag": "b0.sc",
+   "macs": 44064,
+   "k": 24
+  },
+  {
+   "i": 2,
+   "type": "conv",
+   "tag": "b0.c1",
+   "macs": 396576,
+   "k": 216
+  },
+  {
+   "i": 3,
+   "type": "conv",
+   "tag": "b0.c2",
+   "macs": 594864,
+   "k": 324
+  },
+  {
+   "i": 4,
+   "type": "add",
+   "tag": "b0.add",
+   "macs": 0,
+   "k": 0
+  },
+  {
+   "i": 5,
+   "type": "conv",
+   "tag": "b1.c1",
+   "macs": 594864,
+   "k": 324
+  },
+  {
+   "i": 6,
+   "type": "conv",
+   "tag": "b1.c2",
+   "macs": 594864,
+   "k": 324
+  },
+  {
+   "i": 7,
+   "type": "add",
+   "tag": "b1.add",
+   "macs": 0,
+   "k": 0
+  },
+  {
+   "i": 8,
+   "type": "conv",
+   "tag": "b2.sc",
+   "macs": 44928,
+   "k": 36
+  },
+  {
+   "i": 9,
+   "type": "conv",
+   "tag": "b2.c1",
+   "macs": 404352,
+   "k": 324
+  },
+  {
+   "i": 10,
+   "type": "conv",
+   "tag": "b2.c2",
+   "macs": 539136,
+   "k": 432
+  },
+  {
+   "i": 11,
+   "type": "add",
+   "tag": "b2.add",
+   "macs": 0,
+   "k": 0
+  },
+  {
+   "i": 12,
+   "type": "conv",
+   "tag": "b3.c1",
+   "macs": 539136,
+   "k": 432
+  },
+  {
+   "i": 13,
+   "type": "conv",
+   "tag": "b3.c2",
+   "macs": 539136,
+   "k": 432
+  },
+  {
+   "i": 14,
+   "type": "add",
+   "tag": "b3.add",
+   "macs": 0,
+   "k": 0
+  },
+  {
+   "i": 15,
+   "type": "conv",
+   "tag": "b4.sc",
+   "macs": 44928,
+   "k": 48
+  },
+  {
+   "i": 16,
+   "type": "conv",
+   "tag": "b4.c1",
+   "macs": 404352,
+   "k": 432
+  },
+  {
+   "i": 17,
+   "type": "conv",
+   "tag": "b4.c2",
+   "macs": 606528,
+   "k": 648
+  },
+  {
+   "i": 18,
+   "type": "add",
+   "tag": "b4.add",
+   "macs": 0,
+   "k": 0
+  },
+  {
+   "i": 19,
+   "type": "conv",
+   "tag": "b5.c1",
+   "macs": 606528,
+   "k": 648
+  },
+  {
+   "i": 20,
+   "type": "conv",
+   "tag": "b5.c2",
+   "macs": 606528,
+   "k": 648
+  },
+  {
+   "i": 21,
+   "type": "add",
+   "tag": "b5.add",
+   "macs": 0,
+   "k": 0
+  },
+  {
+   "i": 22,
+   "type": "gapfc",
+   "tag": "head",
+   "macs": 864,
+   "k": 72
+  }
+ ],
+ "variant": "w4a4",
+ "acc": 0.9398373983739837,
+ "agree_with_int8": 0.9658536585365853,
+ "weights_bits": 4,
+ "act_bits": 4
+}

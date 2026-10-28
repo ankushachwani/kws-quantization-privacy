@@ -1,0 +1,9 @@
+# tested with Python 3.13 on macOS (arm64)
+numpy==2.4.2
+pandas==3.0.1
+scipy==1.17.1
+matplotlib==3.10.8
+torch==2.11.0
+# torchaudio must match torch; run_all.sh installs it into ./.pylib with --no-deps because the copy in the
+# cryptonite .cache/pylib was built for torch 2.1 and does not load against 2.11
+torchaudio==2.11.0

@@ -1,0 +1,88 @@
+{
+ "key": "s",
+ "label": "DS-CNN-S",
+ "family": "depthwise-sep",
+ "frontend": "hello",
+ "n_eval": 3690,
+ "s_in": 0.04844557694562776,
+ "fp32_acc": 0.948780487804878,
+ "int8_acc": 0.9490514905149051,
+ "int8_vs_fp32_agree": 0.9948509485094851,
+ "arena_bytes": 16492,
+ "blob_bytes": 28880,
+ "macs": 2656768,
+ "weights": 22016,
+ "n_ops": 10,
+ "ops": [
+  {
+   "i": 0,
+   "type": "conv",
+   "tag": "conv0",
+   "macs": 320000,
+   "k": 40
+  },
+  {
+   "i": 1,
+   "type": "conv",
+   "tag": "dw0",
+   "macs": 72000,
+   "k": 9
+  },
+  {
+   "i": 2,
+   "type": "conv",
+   "tag": "pw0",
+   "macs": 512000,
+   "k": 64
+  },
+  {
+   "i": 3,
+   "type": "conv",
+   "tag": "dw1",
+   "macs": 72000,
+   "k": 9
+  },
+  {
+   "i": 4,
+   "type": "conv",
+   "tag": "pw1",
+   "macs": 512000,
+   "k": 64
+  },
+  {
+   "i": 5,
+   "type": "conv",
+   "tag": "dw2",
+   "macs": 72000,
+   "k": 9
+  },
+  {
+   "i": 6,
+   "type": "conv",
+   "tag": "pw2",
+   "macs": 512000,
+   "k": 64
+  },
+  {
+   "i": 7,
+   "type": "conv",
+   "tag": "dw3",
+   "macs": 72000,
+   "k": 9
+  },
+  {
+   "i": 8,
+   "type": "conv",
+   "tag": "pw3",
+   "macs": 512000,
+   "k": 64
+  },
+  {
+   "i": 9,
+   "type": "gapfc",
+   "tag": "head",
+   "macs": 768,
+   "k": 64
+  }
+ ]
+}
