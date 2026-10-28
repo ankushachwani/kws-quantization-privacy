@@ -20,7 +20,7 @@ The question comes from Bits for Privacy (https://arxiv.org/pdf/2512.15335), whi
 
 ## What was done
 
-Models: five small KWS networks from the cryptonite project (DS-CNN-S/M/L, TC-ResNet8, TC-ResNet14-1.5), each as an int8 model and two post-training 4-bit variants built from it (w4a8 = 4-bit weights, 8-bit activations; w4a4 = 4-bit weights and activations). The blobs and the bit-exact integer simulator (`qmodel.run_int`) come from cryptonite; there are no fp32 checkpoints, so there is no fp32 row. The res* models and dnn_l are left out (the res* 4-bit variants are broken by post-training quantisation).
+Models: five small KWS networks from Cryptonite, an earlier project of mine that is not public yet (DS-CNN-S/M/L, TC-ResNet8, TC-ResNet14-1.5), each as an int8 model and two post-training 4-bit variants built from it (w4a8 = 4-bit weights, 8-bit activations; w4a4 = 4-bit weights and activations). The blobs and the bit-exact integer simulator (`qmodel.run_int`) come from cryptonite; there are no fp32 checkpoints, so there is no fp32 row. The res* models and dnn_l are left out (the res* 4-bit variants are broken by post-training quantisation).
 
 Membership (assumed, not verified):
 - Non-members: the official Speech Commands v0.02 test set, 4,890 clips, 12 classes. Silence (408 clips) is dropped from the attack because silence clips are generated and have no membership, leaving 4,482 non-members.
@@ -127,17 +127,21 @@ Layout: `assets/` model blobs, json, stored simulation outputs, manifest, recove
 ## Credits
 
 - Speech Commands dataset: Pete Warden, "Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition", arXiv:1804.03209 (v0.02 release, CC BY 4.0).
-- Models, quantised variants, integer simulator and front end: the cryptonite project, copied read-only into `assets/` and `vendor/`.
+- Models, quantised variants, integer simulator and front end: Cryptonite (an earlier project of mine, not public yet), copied read-only into `assets/` and `vendor/`.
 - Bits for Privacy, https://arxiv.org/pdf/2512.15335.
 - Attacks: Yeom et al. 2018 (loss threshold); Song and Mittal 2021 (modified entropy).
+
+## Licence
+
+My code is MIT licensed (see `LICENSE`).
 
 ## Citation
 
 ```
-@misc{kws_quant_privacy,
+@misc{kws_quantization_privacy,
   author = {ankushachwani},
   title  = {Does int8 vs 4-bit post-training quantisation change membership-inference leakage of small keyword-spotting models?},
   year   = {2026},
-  howpublished = {\url{https://github.com/ankushachwani/kws_quant_privacy}}
+  howpublished = {\url{https://github.com/ankushachwani/kws-quantization-privacy}}
 }
 ```
